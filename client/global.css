@@ -1,0 +1,151 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /**
+   * Spotify-like dark theme based on Figma design
+   * All color variables are expressed as HSL values as expected by tailwind.config.ts
+   */
+  :root {
+    /* Primary background colors from Figma */
+    --background: 0 0% 7.1%; /* #121212 */
+    --foreground: 0 0% 100%; /* #FFFFFF */
+
+    /* Card/content section backgrounds */
+    --card: 0 0% 0%; /* #000000 for content sections */
+    --card-foreground: 0 0% 100%;
+
+    --popover: 0 0% 0%;
+    --popover-foreground: 0 0% 100%;
+
+    /* Text colors */
+    --primary: 0 0% 100%; /* White text */
+    --primary-foreground: 0 0% 7.1%;
+
+    --secondary: 0 0% 12.2%; /* #1F1F1F */
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 0 0% 12.2%;
+    --muted-foreground: 0 0% 70.2%; /* #B3B3B3 */
+
+    --accent: 0 0% 12.2%;
+    --accent-foreground: 0 0% 100%;
+
+    /* Spotify green accent */
+    --spotify-green: 141 76% 48%; /* #1DB954 */
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+
+    /* Border and input styling */
+    --border: 0 0% 20%; /* Subtle borders */
+    --input: 0 0% 12.2%;
+    --ring: 141 76% 48%; /* Spotify green for focus rings */
+
+    --radius: 0.5rem;
+
+    /* Sidebar specific colors */
+    --sidebar-background: 0 0% 0%; /* Black sidebar */
+    --sidebar-foreground: 0 0% 100%;
+    --sidebar-primary: 0 0% 100%;
+    --sidebar-primary-foreground: 0 0% 0%;
+    --sidebar-accent: 0 0% 12.2%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 0 0% 20%;
+    --sidebar-ring: 141 76% 48%;
+
+    /* Gradient colors for bottom preview bar */
+    --gradient-start: 307 66% 43%; /* #AF2896 */
+    --gradient-end: 217 91% 60%; /* #509BF5 */
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family:
+      -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+      "Ubuntu", "Cantarell", sans-serif;
+  }
+
+  /* Custom scrollbar styling for dark theme */
+  ::-webkit-scrollbar {
+    width: 12px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: hsl(var(--background));
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--muted));
+    border-radius: 6px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--muted-foreground));
+  }
+}
+
+@layer components {
+  /* Album card hover effects */
+  .album-card {
+    @apply transition-all duration-200 hover:bg-white/5 cursor-pointer;
+  }
+
+  /* Artist card circular images */
+  .artist-image {
+    @apply aspect-square rounded-full object-cover;
+  }
+
+  /* Gradient background for bottom preview bar */
+  .preview-gradient {
+    background: linear-gradient(
+      90deg,
+      hsl(var(--gradient-start)) 0%,
+      hsl(var(--gradient-end)) 100%
+    );
+  }
+
+  /* Section headings */
+  .section-heading {
+    @apply text-2xl font-bold text-white mb-4;
+  }
+
+  /* Mobile optimizations */
+  @media (max-width: 640px) {
+    .albums-grid {
+      @apply grid-cols-2 gap-3;
+    }
+
+    .trending-grid {
+      @apply space-y-1;
+    }
+  }
+
+  /* Card grid layouts */
+  .albums-grid {
+    @apply grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 sm:gap-4;
+  }
+
+  .trending-grid {
+    @apply grid grid-cols-1 gap-2;
+  }
+
+  /* Responsive navigation */
+  .nav-button {
+    @apply px-4 py-2 rounded-full font-semibold transition-all duration-200;
+  }
+
+  .nav-button-primary {
+    @apply nav-button bg-white text-black hover:scale-105;
+  }
+
+  .nav-button-secondary {
+    @apply nav-button border border-white/20 text-white hover:border-white/40 hover:scale-105;
+  }
+}
